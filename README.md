@@ -1,31 +1,33 @@
-![logo](./assets/banner.svg)
+<center>
+
+<img src="./assets/banner.svg" width="300">
 
 
+##### Bambus Template Engine 
+</center>
 
 
+## Usage
 
-## Usage 
+To get started, follow the example below to render a template:
 
-```py
-
+```python
 import tambus
 
 t = tambus.TambusEngine()
 
-# rendering HTML
+# Rendering HTML
 with open("/templates/index.html") as f:
     print(t.translate(f.read(), hello="world!"))
-
-
 ```
 
-And if we assume that the content of `/templates/index.html` is:
+Imagine the content of `/templates/index.html` is as follows:
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>MyPage</title>
+    <title>My Page</title>
 </head>
 <body>
     <h1> Hello {hello} </h1>
@@ -39,7 +41,7 @@ The output would be:
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>MyPage</title>
+    <title>My Page</title>
 </head>
 <body>
     <h1> Hello world! </h1>
