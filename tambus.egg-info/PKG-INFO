@@ -1,0 +1,65 @@
+Metadata-Version: 2.1
+Name: tambus
+Version: 0.0.1
+Summary: Bambus Template Engine
+Home-page: https://github.com/somespi/tambus
+Author: Someone.
+Author-email: someonegithub@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+<center>
+
+<img src="./assets/banner.svg" width="300">
+
+
+##### Bambus Template Engine 
+</center>
+
+
+
+## Usage 
+
+```py
+
+import tambus
+
+t = tambus.TambusEngine()
+
+# rendering HTML
+with open("/templates/index.html") as f:
+    print(t.translate(f.read(), hello="world!"))
+
+
+```
+
+And if we assume that the content of `/templates/index.html` is:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MyPage</title>
+</head>
+<body>
+    <h1> Hello {hello} </h1>
+</body>
+</html>
+```
+
+The output would be:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MyPage</title>
+</head>
+<body>
+    <h1> Hello world! </h1>
+</body>
+</html>
+```
