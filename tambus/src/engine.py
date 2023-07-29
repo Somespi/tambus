@@ -7,7 +7,8 @@ class TambusEngine:
 
         if re.search(r"{([^#/:]+?(\[\w+\])?)}", self.content):
             self.translate_expressions()
-
+        if re.search(r"{#if\s(.*?)}", self.content):
+            self.translate_if()
         return self.content
 
 
@@ -15,7 +16,23 @@ class TambusEngine:
 
 
 
-
+    def translate_if(self):
+        match = re.search(r"{#if\s(.*?)}", self.content)
+        while match:
+            expression = match.group()[5:-1]
+            if eval(expression):
+                try:
+                    self.content = self.content.replace(match.group(), '',1)
+                    self.content = self.content.replace("{/if}", '', 1)
+                except:
+                    raise ValueError("if brace was not closed")
+            else:
+                try:
+                    self.content = re.sub(r'{#if\s.*?}.*?{\/if}', "", self.content, flags=re.DOTALL)
+                except:
+                    raise ValueError("if brace was not closed")
+        
+            match = re.search(r"{([^#/:]+?(\[\w+\])?)}", self.content)
 
     def translate_expressions(self):
         """
