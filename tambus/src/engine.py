@@ -11,6 +11,16 @@ class TambusEngine:
         return self.content
 
     def translate_expressions(self):
+        """
+        Translates expressions in the content by replacing them with their evaluated values.
+
+        Returns:
+            None
+        
+        Raises:
+            ValueError: If an invalid expression is encountered.
+            ValueError: If there is an error evaluating an expression.
+        """
         match = re.search(r"{([^#/:]+?(\[\w+\])?)}", self.content)
         while match:
             variable = match.group()[1:-1]
