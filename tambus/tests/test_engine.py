@@ -23,7 +23,7 @@ class TranslateTestCase(unittest.TestCase):
     def test_translate_if(self):
         content = "{#if condition} True {/if}"
         kwargs = {"condition": True}
-        expected_result = "True"
+        expected_result = " True "
         result = self.engine.translate(content, kwargs)
         self.assertEqual(result, expected_result)
 
