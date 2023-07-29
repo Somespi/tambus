@@ -3,7 +3,7 @@
 <img src="./assets/banner.svg" width="300">
 
 
-##### Minimalist Template Engine 
+##### Bambus Template Engine 
 </center>
 
 
