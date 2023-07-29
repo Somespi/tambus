@@ -17,6 +17,12 @@ class TambusEngine:
 
 
     def translate_if(self):
+        """
+        Finds and evaluates the conditional statements within the content of HTML.
+
+        Returns:
+            None.
+        """
         match = re.search(r"{#if\s(.*?)}", self.content)
         while match:
             expression = match.group()[5:-1]
