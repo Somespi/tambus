@@ -15,7 +15,7 @@ class TambusEngine:
         self.variables = kwargs
         self.content = content
 
-        if re.search(r"{([^#/:]+?(\[\w+\])?)}", self.content) is not None:
+        if re.search(r"{([^#/:]).*?}", self.content) is not None:
             self.translate_expressions()
         if re.search(r"{#if\s(.*?)}", self.content) is not None:
             self.translate_if()
@@ -50,7 +50,7 @@ class TambusEngine:
             ValueError: If an invalid expression is encountered.
             ValueError: If there is an error evaluating an expression.
         """
-        pattern = r"{([^#/:]+?(\[\w+\])?)}"
+        pattern = r"{([^#/:]).*?}"
         match = re.search(pattern, self.content)
         while match:
             variable = match.group()[1:-1]
