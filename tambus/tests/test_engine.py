@@ -15,7 +15,7 @@ class TranslateTestCase(unittest.TestCase):
 
     def test_translate_expressions(self):
         content = "The result is {result[0]}"
-        kwargs = {"result": [42]}
+        kwargs = {"result": [42, 43,22, 23]}
         expected_result = "The result is 42"
         result = self.engine.translate(content, kwargs)
         self.assertEqual(result, expected_result)
