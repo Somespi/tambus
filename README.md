@@ -1,10 +1,6 @@
-<center>
-
-<img src="./assets/banner.svg" width="300">
+![logo](./assets/banner.svg)
 
 
-##### Bambus Template Engine 
-</center>
 
 
 
