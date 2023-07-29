@@ -23,7 +23,7 @@ class TambusEngine:
         Returns:
             None.
         """
-        match = re.search(r"{#if\s(.*?)}", self.content)
+        match = re.search(r"{#if\s(.*?)}", self.content, flags=re.DOTALL)
         while match:
             expression = match.group()[5:-1]
             if eval(expression):
@@ -38,8 +38,9 @@ class TambusEngine:
                 except:
                     raise ValueError("if brace was not closed")
         
-            match = re.search(r"{([^#/:]+?(\[\w+\])?)}", self.content)
+            match = re.search(r"{#if\s(.*?)}", self.content,flags=re.DOTALL)
 
+    
     def translate_expressions(self):
         """
         Translates expressions in the content by replacing them with their evaluated values.
