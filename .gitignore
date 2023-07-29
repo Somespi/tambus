@@ -20,3 +20,4 @@ build/
 # information for Eclipse / Flash Builder.
 tambus.egg-info
 .vscode
+tambus/tests
