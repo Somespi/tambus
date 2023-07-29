@@ -32,7 +32,7 @@ class TambusEngine:
         match = re.search(r"{#if\s(.*?)}", self.content, flags=re.DOTALL)
         while match:
             expression = match.group()[5:-1]
-            if eval(expression):
+            if eval(expression, self.variables):
                 self.content = self.content.replace(match.group(), '', 1).replace("{/if}", '', 1)
             else:
                 self.content = re.sub(r'{#if\s.*?}.*?{\/if}', "", self.content, flags=re.DOTALL)
