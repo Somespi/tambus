@@ -11,7 +11,7 @@ public:
     }
 
     std::string translate( std::string code) {
-        if (std::regex_search(code, std::regex() ) ) {
+        if (std::regex_search(code, std::regex("\\{\\{(.*?)\\}\\}"))) {
             code = translate_variables(code);
         }
 
