@@ -10,6 +10,13 @@ class TambusEngine:
 
         return self.content
 
+
+
+
+
+
+
+
     def translate_expressions(self):
         """
         Translates expressions in the content by replacing them with their evaluated values.
@@ -33,6 +40,3 @@ class TambusEngine:
                 raise ValueError(f"Error evaluating expression: '{variable}'. {e}")
 
             match = re.search(r"{([^#/:]+?(\[\w+\])?)}", self.content)
-
-t = TambusEngine()
-print(t.translate("<h1>{a}</h1>", {'a': 44}))
