@@ -1,7 +1,7 @@
 import re
 
 class TambusEngine:
-    def translate(self, content: str, kwargs):
+    def translate(self, content: str, **kwargs):
         """
         Translates the given template.
 
