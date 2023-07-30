@@ -7,7 +7,7 @@ class TambusEngine:
 
         Parameters:
             content (str): The content to be translated.
-            kwargs (dict): The dictionary of variables to be used for translation.
+            **kwargs (dict): The dictionary of variables to be used for translation.
 
         Returns:
             str: The translated content.
@@ -95,5 +95,4 @@ class TambusEngine:
                 raise ValueError(f"Error evaluating expression: '{variable}'. {e}")
 
             match = re.search(pattern, self.content)
-
 
