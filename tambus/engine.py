@@ -14,12 +14,44 @@ class TambusEngine:
         """
         self.variables = kwargs
         self.content = content
-
+        if re.search(r"{#repeat\s(.*?)}", self.content) is not None:
+            self.translate_repeat()
         if re.search(r"{([^#/:]).*?}", self.content) is not None:
             self.translate_expressions()
         if re.search(r"{#if\s(.*?)}", self.content) is not None:
             self.translate_if()
         return self.content
+    
+    def translate_repeat(self):
+        """
+        Translates each occurrence of the repeat block in the content string.
+        
+        Parameters:
+            self (TranslateEach): The instance of the TranslateEach class.
+        
+        Returns:
+            None
+        """
+        match = re.search(r"{#repeat\s(.*?)}", self.content, flags=re.DOTALL)
+        while match:
+            try:
+                number = match.group(1)
+            except:
+                raise ValueError("Must be a valid pattern:repeat int")
+            
+            if isinstance(eval(number, self.variables), int):
+                try:
+                    elem = self.content.split(match.group())[1].split("{/repeat}")
+                except:
+                    raise ValueError("Closing repeat was not found")
+                repeated_elem = [elem[1]] * int(number)
+                self.content =  ''.join([elem[0], *repeated_elem, elem[2]])
+            else:
+                raise ValueError("Value after repeat block must be: integer")
+        
+            match = re.search(r"{#repeat\s(.*?)}", self.content, flags=re.DOTALL)
+
+
 
 
     def translate_if(self):
