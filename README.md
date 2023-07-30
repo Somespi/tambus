@@ -48,3 +48,11 @@ The output would be:
 </body>
 </html>
 ```
+
+
+## Contribution Guidelines
+Contributions to Tambus are welcome! If you have any bug fixes, improvements, or new features to add, please submit a pull request. Make sure to follow the coding style and include tests for any new functionality.
+            
+## License
+Tambus is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more information.
+            
