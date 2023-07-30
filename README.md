@@ -30,7 +30,7 @@ Imagine the content of `/templates/index.html` is as follows:
     <title>My Page</title>
 </head>
 <body>
-    <h1> Hello {content} </h1>
+    <h1> Hello {hello} </h1>
 </body>
 </html>
 ```
