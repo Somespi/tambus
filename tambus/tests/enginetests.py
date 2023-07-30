@@ -1,7 +1,7 @@
 import re
 
 class TambusEngine:
-    def translate(self, content: str, kwargs):
+    def translate(self, content: str, **kwargs):
         """
         Translates the given template.
 
@@ -14,12 +14,42 @@ class TambusEngine:
         """
         self.variables = kwargs
         self.content = content
-
-        if re.search(r"{([^#/:]+?(\[\w+\])?)}", self.content) is not None:
+        if re.search(r"{#repeat\s(.*?)}", self.content) is not None:
+            self.translate_repeat()
+        if re.search(r"{([^#/:]).*?}", self.content) is not None:
             self.translate_expressions()
         if re.search(r"{#if\s(.*?)}", self.content) is not None:
             self.translate_if()
         return self.content
+    
+    def translate_repeat(self):
+        """
+        Translates each occurrence of the repeat block in the content string.
+        
+        Parameters:
+            self (TranslateEach): The instance of the TranslateEach class.
+        
+        Returns:
+            None
+        """
+        match = re.search(r"{#repeat\s(.*?)}", self.content, flags=re.DOTALL)
+        while match:
+            number = match.group(1)
+            if isinstance(eval(number, self.variables), int):
+                try:
+                    elem = self.content.split(match.group())
+                    elem[1] = elem[1].split("{/repeat}")
+                except:
+                    raise ValueError("Closing repeat was not found")
+                repeated_elem = [elem[1][0]] * int(number)
+
+                self.content =  ''.join([elem[0], ''.join(map(str, repeated_elem)), elem[1][1]])
+            else:
+                raise ValueError("Value after repeat block must be: integer")
+        
+            match = re.search(r"{#repeat\s(.*?)}", self.content, flags=re.DOTALL)
+
+
 
 
     def translate_if(self):
@@ -31,7 +61,7 @@ class TambusEngine:
         """
         match = re.search(r"{#if\s(.*?)}", self.content, flags=re.DOTALL)
         while match:
-            expression = match.group()[5:-1]
+            expression = match.group(1)
             if eval(expression, self.variables):
                 self.content = self.content.replace(match.group(), '', 1).replace("{/if}", '', 1)
             else:
@@ -50,7 +80,7 @@ class TambusEngine:
             ValueError: If an invalid expression is encountered.
             ValueError: If there is an error evaluating an expression.
         """
-        pattern = r"{([^#/:]+?(\[\w+\])?)}"
+        pattern = r"{([^#/:]).*?}"
         match = re.search(pattern, self.content)
         while match:
             variable = match.group()[1:-1]
@@ -65,3 +95,5 @@ class TambusEngine:
                 raise ValueError(f"Error evaluating expression: '{variable}'. {e}")
 
             match = re.search(pattern, self.content)
+
+
