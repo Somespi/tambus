@@ -34,18 +34,16 @@ class TambusEngine:
         """
         match = re.search(r"{#repeat\s(.*?)}", self.content, flags=re.DOTALL)
         while match:
-            try:
-                number = match.group(1)
-            except:
-                raise ValueError("Must be a valid pattern:repeat int")
-            
+            number = match.group(1)
             if isinstance(eval(number, self.variables), int):
                 try:
-                    elem = self.content.split(match.group())[1].split("{/repeat}")
+                    elem = self.content.split(match.group())
+                    elem[1] = elem[1].split("{/repeat}")
                 except:
                     raise ValueError("Closing repeat was not found")
-                repeated_elem = [elem[1]] * int(number)
-                self.content =  ''.join([elem[0], *repeated_elem, elem[2]])
+                repeated_elem = [elem[1][0]] * int(number)
+
+                self.content =  ''.join([elem[0], ''.join(map(str, repeated_elem)), elem[1][1]])
             else:
                 raise ValueError("Value after repeat block must be: integer")
         
