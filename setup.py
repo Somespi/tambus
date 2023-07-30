@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tambus",
-    version="0.2.0",
+    version="1.0.0",
     author="Someone.",
     author_email="someonegithub@gmail.com",
     description="Bambus Template Engine",
