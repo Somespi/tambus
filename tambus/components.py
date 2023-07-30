@@ -4,8 +4,9 @@ import re
 
 @dataclass
 class Component:
-    content: str
-    regex: str 
+    pattern: str
+    replace: str 
     
     def replace_regex(self, content: str):
-        return re.sub(self.regex, self.content, content) 
+        return re.sub(self.pattern,self.replace,  content) 
+

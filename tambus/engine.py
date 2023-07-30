@@ -1,6 +1,22 @@
 import re
+from mdengine import MDEngine
+from components import Component
 
 class TambusEngine:
+    
+    def md_integrate(self, content: str, md: str, components):
+        """
+        for base.html
+        """
+        md = MDEngine(components).translate(md)
+        content = self.translate(content)
+        match = re.search(r"{@placehold\s(.*?)}", self.content, flags=re.DOTALL)
+        if match:
+            if match.group(1).strip() == '__content':
+                content = content.replace(match.group(), md)
+        return content
+
+
     def translate(self, content: str, **kwargs):
         """
         Translates the given template.
@@ -16,7 +32,7 @@ class TambusEngine:
         self.content = content
         if re.search(r"{#repeat\s(.*?)}", self.content) is not None:
             self.translate_repeat()
-        if re.search(r"{([^#/:]).*?}", self.content) is not None:
+        if re.search(r"{([^@#/:]).*?}", self.content) is not None:
             self.translate_expressions()
         if re.search(r"{#if\s(.*?)}", self.content) is not None:
             self.translate_if()
@@ -80,7 +96,7 @@ class TambusEngine:
             ValueError: If an invalid expression is encountered.
             ValueError: If there is an error evaluating an expression.
         """
-        pattern = r"{([^#/:]).*?}"
+        pattern = r"{([^@#/:]).*?}"
         match = re.search(pattern, self.content)
         while match:
             variable = match.group()[1:-1]
@@ -95,4 +111,3 @@ class TambusEngine:
                 raise ValueError(f"Error evaluating expression: '{variable}'. {e}")
 
             match = re.search(pattern, self.content)
-
