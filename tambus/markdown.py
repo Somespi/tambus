@@ -10,5 +10,4 @@ class MDEngine:
         
         for component in self.components:
             self.content = component.replace_regex(self.content)
-
-
+        return self.content
