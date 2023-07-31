@@ -49,6 +49,24 @@ The output would be:
 </html>
 ```
 
+## overflow Control
+you can use if statement in tambus using this syntax:
+``html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Page</title>
+</head>
+<body>
+    <h1>The Answer:
+    {#if is_true}
+        <bold>True</bold>
+    {/if}
+    </h1>
+</body>
+</html>
+``
+
 
 ## Contribution Guidelines
 Contributions to Tambus are welcome! If you have any bug fixes, improvements, or new features to add, please submit a pull request. Make sure to follow the coding style and include tests for any new functionality.
