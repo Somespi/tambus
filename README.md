@@ -50,8 +50,10 @@ The output would be:
 ```
 
 ## overflow Control
+
 you can use if statement in tambus using this syntax:
-``html
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +67,7 @@ you can use if statement in tambus using this syntax:
     </h1>
 </body>
 </html>
-``
+```
 
 
 ## Contribution Guidelines
