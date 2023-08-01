@@ -3,7 +3,7 @@
 <img src="./assets/banner.svg" width="300">
 
 
-##### Bambus Template Engine 
+##### very basic Template Engine 
 </center>
 
 
@@ -49,7 +49,7 @@ The output would be:
 </html>
 ```
 
-## overflow Control
+## Other features
 
 you can use if statement in tambus using this syntax:
 
@@ -67,6 +67,35 @@ you can use if statement in tambus using this syntax:
     </h1>
 </body>
 </html>
+```
+
+You can also repeat some part of the code using `{#repeat}`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Page</title>
+</head>
+<body>
+    <h1>The Answer:
+    {#repeat 5}
+        {car}
+    {/repeat}
+    </h1>
+</body>
+</html>
+```
+## Markdown 
+tambus offers a great way for customizable MD2HTML. 
+
+```python
+from tambus import MDEngine, Component
+
+component = [Component(r"# (.*?)",r"<h1 class='my-custom-h1'>\1</h1>")] 
+
+with open("file.md") as f:
+    mdcontent = MDEngine(component).translate(f.read())
 ```
 
 
